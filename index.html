@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Encriptador</title>
+        <link rel="stylesheet" href="estilo.css" >
+    </head>
+    <body>
+        <div class="titulo">
+            <img src="Logo.png" alt="Logo Miguel" class="logo">
+            <h1 class="tit">Encriptador</h1>
+        </div>
+        <div class="encrip">
+            <form action="" class="formulario">
+                <textarea placeholder="Ingrese el texto a encriptar" class="textEncriptar" id="txtEncriptar"></textarea>
+                <input class="boton" type="button" value="Encriptar" id="encriptar" name="encriptar" onclick="procesoEncriptar()">
+                <input class="boton" type="button" value="Desencriptar" id="desencriptar" name="desencriptar" onclick="procesoDesencriptar()">
+                <input class="boton" type="button" value="Copiar" id="Copiar" name="Copiar" onclick="copiar()">
+                <input class="boton" type="button" value="Limpiar" id="Limpiar" name="Limpiar" onclick="limpiar()">
+            </form>
+            <textarea placeholder="Ningún mensaje fue encontrado" class="text" id="txtDesencriptar"></textarea>
+        </div>
+        <script>
+            const letra=[['a','ai'],['e','enter'],['i','imes'],['o','ober'],['u','ufat']]
+            
+            function procesoEncriptar() {
+                event.preventDefault();
+                var texto= document.getElementById("txtEncriptar").value.toLowerCase();
+                var textoEncriptado= document.getElementById("txtDesencriptar");
+                texto.toString();
+                var vector= texto.split('');
+                for(var i=0;i<vector.length;i++){
+                    for(var j=0;j<letra.length;j++){
+                        if(vector[i]==letra[j][0]){
+                            vector[i]=letra[j][1];
+                        }
+                    }
+                }
+                var resultado= ''.concat(...vector);
+                textoEncriptado.value=resultado;
+            }
+
+            function desencriptar(texto) {
+                return texto
+                .replace(/enter/g, "e")
+                .replace(/imes/g, "i")
+                .replace(/ai/g, "a")
+                .replace(/ober/g, "o")
+                .replace(/ufat/g, "u");
+            }
+
+            function procesoDesencriptar() {
+                event.preventDefault();
+                var textoEncriptado= document.getElementById("txtDesencriptar");
+                var resultado= desencriptar(textoEncriptado.value);
+                textoEncriptado.value=resultado;
+            }
+
+            function limpiar() {
+                event.preventDefault();
+                var texto= document.getElementById("txtEncriptar");
+                var textoEncriptado= document.getElementById("txtDesencriptar");
+                texto.value=" ";
+                textoEncriptado.value=" ";
+            }
+
+            
+                const $codigoACopiar = document.getElementById('textoEncriptado');
+                const $btn = document.getElementById('Copiar');
+                
+                $btn.addEventListener('click', e=>{
+                    $codigoACopiar.select();
+                    document.execCommand('copy');
+                })
+            
+
+        </script>
+    </body>
+    
+
+</html>
