@@ -16,14 +16,15 @@
                 <textarea placeholder="Ingrese el texto a encriptar" class="textEncriptar" id="txtEncriptar"></textarea>
                 <input class="boton" type="button" value="Encriptar" id="encriptar" name="encriptar" onclick="procesoEncriptar()">
                 <input class="boton" type="button" value="Desencriptar" id="desencriptar" name="desencriptar" onclick="procesoDesencriptar()">
-                <input class="boton" type="button" value="Copiar" id="Copiar" name="Copiar" onclick="copiar()">
+                <input class="boton" type="button" value="Historial" id="Historial" name="Historial" onclick="historial()">
                 <input class="boton" type="button" value="Limpiar" id="Limpiar" name="Limpiar" onclick="limpiar()">
             </form>
             <textarea placeholder="Ningún mensaje fue encontrado" class="text" id="txtDesencriptar"></textarea>
         </div>
         <script>
             const letra=[['a','ai'],['e','enter'],['i','imes'],['o','ober'],['u','ufat']]
-            
+            var Historial=[]
+
             function procesoEncriptar() {
                 event.preventDefault();
                 var texto= document.getElementById("txtEncriptar").value.toLowerCase();
@@ -39,6 +40,7 @@
                 }
                 var resultado= ''.concat(...vector);
                 textoEncriptado.value=resultado;
+                Historial.push(texto.toString());
             }
 
             function desencriptar(texto) {
@@ -65,14 +67,15 @@
                 textoEncriptado.value=" ";
             }
 
-            
-                const $codigoACopiar = document.getElementById('textoEncriptado');
-                const $btn = document.getElementById('Copiar');
-                
-                $btn.addEventListener('click', e=>{
-                    $codigoACopiar.select();
-                    document.execCommand('copy');
-                })
+            function historial(){
+                event.preventDefault();
+                textoHistorial=""
+                var textoEncrip= document.getElementById("txtEncriptar");
+                for(var i=0;i<Historial.length;i++){
+                    textoHistorial+=Historial[i]+"\n";
+                }
+                textoEncrip.value=textoHistorial
+            }
             
 
         </script>
